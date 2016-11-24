@@ -2,11 +2,7 @@
 
 using namespace std;
 
-char board[3][3] = {
-	{'1', '2', '3'},
-	{'4', '5', '6'},
-	{'7', '8', '9'}
-};
+char board[3][3] = { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
 
 char player = 'X';
 char winner;
@@ -37,11 +33,11 @@ void Input() {
 		cin >> slot;
 		slot--;
 
-		if (board[slot/3][slot%3] != 'X' && board[slot/3][slot%3] != 'O') {
-		  board[slot/3][slot%3] = player;
-		  mark_is_accepted = true;
+		if (board[slot / 3][slot % 3] != 'X' && board[slot / 3][slot % 3] != 'O') {
+			board[slot / 3][slot % 3] = player;
+			mark_is_accepted = true;
 		} else {
-		  cout << "You cannot move there. Select another spot." << endl;
+			cout << "You cannot move there. Select another spot." << endl;
 		}
 	}
 }
@@ -58,58 +54,58 @@ void TogglePlayer() {
 }
 
 void CheckWinner(char current_player) {
-  // check matrix for a winner
-  // there is probably a much better way to do this but for now, just make it work
+	// check matrix for a winner
+	// there is probably a much better way to do this but for now, just make it work
 
-  // check horizontal wins
-  if (board[0][0] == board[0][1] && board[0][1] == board[0][2]) {
-	  game_in_progress = false;
-  }
+	// check horizontal wins
+	if (board[0][0] == board[0][1] && board[0][1] == board[0][2]) {
+		game_in_progress = false;
+	}
 
-  if (board[1][0] == board[1][1] && board[1][1] == board[1][2]) {
-  	  game_in_progress = false;
-  }
+	if (board[1][0] == board[1][1] && board[1][1] == board[1][2]) {
+		game_in_progress = false;
+	}
 
-  if (board[2][0] == board[2][1] && board[0][1] == board[2][2]) {
-	  game_in_progress = false;
-  }
+	if (board[2][0] == board[2][1] && board[0][1] == board[2][2]) {
+		game_in_progress = false;
+	}
 
-  // check vertical wins
-  if (board[0][0] == board[1][0] && board[1][0] == board[2][0]) {
-  	  game_in_progress = false;
-  }
+	// check vertical wins
+	if (board[0][0] == board[1][0] && board[1][0] == board[2][0]) {
+		game_in_progress = false;
+	}
 
-  if (board[0][1] == board[1][1] && board[1][1] == board[2][1]) {
-	  game_in_progress = false;
-  }
+	if (board[0][1] == board[1][1] && board[1][1] == board[2][1]) {
+		game_in_progress = false;
+	}
 
-  if (board[0][2] == board[1][2] && board[1][2] == board[2][2]) {
-      game_in_progress = false;
-  }
+	if (board[0][2] == board[1][2] && board[1][2] == board[2][2]) {
+		game_in_progress = false;
+	}
 
-  // check diagonal wins
-  if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
-	  game_in_progress = false;
-  }
+	// check diagonal wins
+	if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+		game_in_progress = false;
+	}
 
-  if (board[0][2] == board[1][2] && board[1][2] == board[2][2]) {
-	  game_in_progress = false;
-  }
+	if (board[0][2] == board[1][2] && board[1][2] == board[2][2]) {
+		game_in_progress = false;
+	}
 
-  if (!game_in_progress) {
-	  winner = current_player;
-  }
+	if (!game_in_progress) {
+		winner = current_player;
+	}
 }
 
 void CheckTie() {
-  for (int i = 0; i < 3; i++) {
-	for (int j = 0; j < 3; j++) {
-		if (board[i][j] != 'X' && board[i][j] != 'O') {
-			tie_found = false;
-			break;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (board[i][j] != 'X' && board[i][j] != 'O') {
+				tie_found = false;
+				break;
+			}
 		}
 	}
-  }
 }
 
 int main() {
@@ -124,8 +120,8 @@ int main() {
 	do {
 		Input();
 		Draw();
-        CheckWinner(player);
-        CheckTie();
+		CheckWinner(player);
+		CheckTie();
 		TogglePlayer();
 	} while (game_in_progress);
 
