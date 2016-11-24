@@ -106,6 +106,7 @@ bool CheckTie() {
 		}
 	}
 
+	game_in_progress = false;
 	return true;
 }
 
