@@ -97,15 +97,16 @@ void CheckWinner(char current_player) {
 	}
 }
 
-void CheckTie() {
+bool CheckTie() {
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
 			if (board[i][j] != 'X' && board[i][j] != 'O') {
-				tie_found = false;
-				break;
+				return false;
 			}
 		}
 	}
+
+	return true;
 }
 
 int main() {
@@ -121,16 +122,20 @@ int main() {
 		Input();
 		Draw();
 		CheckWinner(player);
-		CheckTie();
-		TogglePlayer();
+
+		if (CheckTie()) {
+			winner = 'T';
+		}
+
+		if (!winner) {
+			TogglePlayer();
+		}
 	} while (game_in_progress);
 
-	// if winner found or tie.... need some logic here
-	if (winner) {
+	// if winner determined
+	if (winner != 'T') {
 		cout << "That's game! Tic tac toe! Congratulations player '" << winner << "' is the winner!";
-	}
-
-	if (tie_found) {
+	} else {
 		cout << "Its a tie! Game over! Neither player wins.";
 	}
 
